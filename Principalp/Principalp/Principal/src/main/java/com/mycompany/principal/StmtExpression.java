@@ -11,9 +11,9 @@ public class StmtExpression extends Statement {
 
     Object ejecutar(Tabla tabla){
         analyzeExpression(expressionStatement.getExpression(), localScope);
+        return null;
+         //return expression.ejecutar(tabla);
     }
-    StmtExpression(java.beans.Expression expr) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 
 }

@@ -11,7 +11,18 @@ public class StmtVar extends Statement {
         this.initializer = initializer;
     }
 
-    StmtVar(Token name, java.beans.Expression initialziaer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     void ejecutar(Tabla tabla) {
+        try {
+            if (initializer != null) {
+                value = initializer.ejecutar(tabla);
+            }
+
+            if (!tabla.existeIdentificador(name.lexema)) {
+                tabla.declarar(name.lexema, value);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al ejecutar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

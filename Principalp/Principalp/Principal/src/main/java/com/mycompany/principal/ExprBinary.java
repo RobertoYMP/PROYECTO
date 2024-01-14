@@ -12,7 +12,7 @@ public class ExprBinary extends Expression{
         this.operator = operator;
         this.right = right;
     }
-    @Override 
+ /*   @Override 
     Object tablasimbolos (Tabla tabla){
         Object Valueizq = left.tablasimbolos(tabla);
         Object Valueder = left.tablasimbolos(tabla);
@@ -46,7 +46,8 @@ public class ExprBinary extends Expression{
         } else {
             throw new RuntimeException("No es el tipo de dato");
             }
-        }
-    }
+       }
+    */
+}
 
 

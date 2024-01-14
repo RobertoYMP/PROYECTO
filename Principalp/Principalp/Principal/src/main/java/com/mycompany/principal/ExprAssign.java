@@ -9,7 +9,16 @@ public class ExprAssign extends Expression{
         this.name = name;
         this.value = value;
     }
-    @Override
+    public Expression getValue(){
+        return value;
+    }
+    public Expression getVariable(){
+        return value;
+    }
+    public Token getName(){
+        return name;
+    }
+  /*  @Override
             Object tablasimbolos(Tabla tabla){
             if (!tabla.existeIdentificador(name.lexema)){
             throw new RuntimeException("No se reconocio la variable");
@@ -22,5 +31,5 @@ public class ExprAssign extends Expression{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-
+*/
 }

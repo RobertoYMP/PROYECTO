@@ -7,8 +7,13 @@ public class StmtPrint extends Statement {
     StmtPrint(Expression expression) {
         this.expression = expression;
     }
-
-    StmtPrint(java.beans.Expression expr) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+   void ejecutar(Tabla tabla) {
+        try {
+            System.out.println(expression.ejecutar(tabla));
+        } catch (Exception e) {
+            System.err.println("Error al evaluar la expresión: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

@@ -12,4 +12,23 @@ public class StmtClass extends Statement {
         this.superclass = superclass;
         this.methods = methods;
     }
+    Object ejecutar(Tabla tabla){
+        try{
+            Object Valuesup = null;
+            if(superclass != null){
+                Valuesup = superclass.ejecutar(tabla);
+            }
+            Tabla classEnv = new Tabla(tabla);
+            classEnv.asignar(name.lexema, Valuesup);
+            for(StmtFunction method : methods){
+                method.ejecutar(classEnv);  
+            }
+            return null;
+        }catch (Exception e){
+            //throw new RuntimeException("No se ejecuto la clase");
+           System.err.println("No se ejecuto la clase " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
