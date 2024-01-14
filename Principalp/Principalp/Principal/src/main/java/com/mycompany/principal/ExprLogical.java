@@ -10,7 +10,13 @@ public class ExprLogical extends Expression{
         this.operator = operator;
         this.right = right;
     }
-    
+    public Expression getLeft(){
+        return left;
+    }
+
+    public Expression getRight(){
+        return right;
+    }
     @Override
     Object tablasimbolos (Tabla tabla){
         Object Valueizq = left.tablasimbolos(tabla);

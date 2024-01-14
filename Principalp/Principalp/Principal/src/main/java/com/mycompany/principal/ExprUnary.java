@@ -9,6 +9,9 @@ public class ExprUnary extends Expression{
         this.operator = operator;
         this.right = right;
     }
+    public Expression getOperand(){
+        return right;
+    }
     
     Object tablasimbolos (Tabla tabla){
         Object resultabla = right.tablasimbolos(tabla);

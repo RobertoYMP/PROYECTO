@@ -18,6 +18,9 @@ public class Token {
         this.literal =literal;
         return literal;
     }
+    public String getLexema() {
+        return lexema;
+    }
 
     public Token(TipoToken tipo, String lexema) {
         this();
