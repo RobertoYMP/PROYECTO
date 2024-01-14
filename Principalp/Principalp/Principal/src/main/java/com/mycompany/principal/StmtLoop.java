@@ -6,15 +6,8 @@ public class StmtLoop extends Statement {
     final Expression condition;
     final Statement body;
     final Expression update;
-
-    StmtLoop(Statement initialization, Expression condition, Expression update, Statement body) {
-        this.initialization = initialization;
-        this.condition = condition;
-        this.update = update;
-        this.body = body;
-    }
-
-         void ejecutar (Tabla tabla){
+    
+    Object ejecutar (TablaSimbolos tabla){
          if (initialization != null) {
          System.out.println("Inicialización del bucle for");
             initialization.ejecutar(tabla);
@@ -26,6 +19,16 @@ public class StmtLoop extends Statement {
             if (update != null) {
                 update.ejecutar(tabla);
             }
-        }
+	}
+	return null;
     }
+
+    StmtLoop(Statement initialization, Expression condition, Expression update, Statement body) {
+        this.initialization = initialization;
+        this.condition = condition;
+        this.update = update;
+        this.body = body;
+    }
+
+    
 }

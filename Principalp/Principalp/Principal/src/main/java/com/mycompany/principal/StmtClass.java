@@ -12,13 +12,13 @@ public class StmtClass extends Statement {
         this.superclass = superclass;
         this.methods = methods;
     }
-    Object ejecutar(Tabla tabla){
+    Object ejecutar(TablaSimbolos tabla){
         try{
             Object Valuesup = null;
             if(superclass != null){
                 Valuesup = superclass.ejecutar(tabla);
             }
-            Tabla classEnv = new Tabla(tabla);
+            TablaSimbolos classEnv = new TablaSimbolos(tabla);
             classEnv.asignar(name.lexema, Valuesup);
             for(StmtFunction method : methods){
                 method.ejecutar(classEnv);  

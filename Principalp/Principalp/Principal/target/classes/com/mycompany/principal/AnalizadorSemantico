@@ -2,16 +2,10 @@ package com.mycompany.principal;
 
 public class AnalizadorSemantico {
 
-  private TablaSimbolos tablaSimbolosGlobal;
-  private TablaSimbolos tablaSimbolosActual;
-  private TablaSimbolos tablaActual; // cambiado a TablaSimbolos
-
-  public void procesarStmtVar(StmtVar stmt) {
-    stmt.ejecutar(tablaActual);
-  }
+  private Tabla tablaSimbolosGlobal;
+  private Tabla tablaSimbolosActual;
 
   public AnalizadorSemantico() {
-    this.tablaActual = new Tabla();
     this.tablaSimbolosGlobal = new TablaSimbolos(null);
     this.tablaSimbolosActual = tablaSimbolosGlobal;
   }
@@ -33,6 +27,8 @@ public class AnalizadorSemantico {
     return tablaSimbolosActual.consultar(var); 
   }
 
-  
+  public void procesarStmtVar(StmtVar stmt) {
+    stmt.declarar(tablaActual); 
+  }
 
 }

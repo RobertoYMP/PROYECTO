@@ -1,30 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.principal;
-
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Tabla  {
+public class Tabla extends TablaSimbolos{
 
     private final Map<String, Object> values = new HashMap<>();
 
-    boolean existeIdentificador(token name){
-        return values.containsKey(name);
+    boolean existeIdentificador(String identificador){
+        return values.containsKey(identificador);
     }
+    
+    public Tabla() {
+    super(null);
+	}
 
-    Object obtener(token identificador) {
+    Object obtener(String identificador) {
         if (values.containsKey(identificador)) {
             return values.get(identificador);
         }
-        throw new RuntimeException("Variable no definida '" + name + "'.");
+        throw new RuntimeException("Variable no definida '" + identificador + "'.");
     }
 
-    void asignar(token name, Object valor){
-        values.put(name, valor);
+    void asignar(String identificador, Object valor){
+        values.put(identificador, valor);
     }
 
 

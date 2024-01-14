@@ -14,7 +14,8 @@ public class StmtFunction extends Statement {
     }
 
     @Override
-    void ejecutar(Tabla tabla){
+    Object ejecutar(TablaSimbolos tabla){
         tabla.asignar(name.lexema,this);
+	return null;
     }
 }

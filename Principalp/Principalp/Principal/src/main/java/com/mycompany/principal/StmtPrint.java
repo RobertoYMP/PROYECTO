@@ -8,12 +8,13 @@ public class StmtPrint extends Statement {
         this.expression = expression;
     }
     
-   void ejecutar(Tabla tabla) {
+   Object ejecutar(TablaSimbolos tabla) {
         try {
             System.out.println(expression.ejecutar(tabla));
         } catch (Exception e) {
             System.err.println("Error al evaluar la expresión: " + e.getMessage());
             e.printStackTrace();
         }
+	    return null;
     }
 }

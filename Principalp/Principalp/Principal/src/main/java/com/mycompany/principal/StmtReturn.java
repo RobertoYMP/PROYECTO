@@ -7,7 +7,8 @@ public class StmtReturn extends Statement {
         this.value = value;
     }
 
-    Object ejecutar(Tabla tabla) {
+    @Override
+    Object ejecutar(TablaSimbolos tabla) {
         try {
             return value.ejecutar(tabla);
         } catch (Exception e) {
