@@ -24,14 +24,14 @@ public class ExprCallFunction extends Expression{
                 argumento.add(expression.tablasimbolos(tabla));
                 
             }
-            if(params.size() != funcion.params.size()){
+            if(argumento.size() != funcion.params.size()){
                 throw new RuntimeException("El numero de argumentos no son correctos para la funcion"+ name.lexema+" ");
                 
             }
             
             Tabla entornoLocal = new Tabla();
-            for (int i = 0; i < params.size(); i++) {
-                entornoLocal.asignar(params.get(i).lexema, argumento.get(i));
+            for (int i = 0; i < argumento.size(); i++) {
+                entornoLocal.asignar(funcion.params.get(i).lexema, argumento.get(i));
             }
             funcion.body.ejecutar(entornoLocal);
         }
