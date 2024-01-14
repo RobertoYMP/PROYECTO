@@ -1,0 +1,6 @@
+com\mycompany\principal\Principal.class
+com\mycompany\principal\Scanner.class
+com\mycompany\principal\Token.class
+com\mycompany\principal\ASDI.class
+com\mycompany\principal\Parser.class
+com\mycompany\principal\TipoToken.class
