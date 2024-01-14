@@ -1,0 +1,34 @@
+package com.mycompany.principal;
+
+public class AnalizadorSemantico {
+
+  private Tabla tablaSimbolosGlobal;
+  private Tabla tablaSimbolosActual;
+
+  public AnalizadorSemantico() {
+    this.tablaSimbolosGlobal = new TablaSimbolos(null);
+    this.tablaSimbolosActual = tablaSimbolosGlobal;
+  }
+
+  public void entrarBloque() {
+    TablaSimbolos nuevaTabla = new TablaSimbolos(this.tablaSimbolosActual);
+    this.tablaSimbolosActual = nuevaTabla;
+  }
+  
+  public void salirBloque() {
+    this.tablaSimbolosActual = this.tablaSimbolosActual.getPadre();
+  }
+  
+  public void asignar(String var, Object valor) {
+    tablaSimbolosActual.asignar(var, valor);
+  }
+
+  public Object consultar(String var) {
+    return tablaSimbolosActual.consultar(var); 
+  }
+
+  public void procesarStmtVar(StmtVar stmt) {
+    stmt.declarar(tablaActual); 
+  }
+
+}

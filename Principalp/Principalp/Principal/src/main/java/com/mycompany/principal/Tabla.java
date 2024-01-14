@@ -12,19 +12,19 @@ public class Tabla  {
 
     private final Map<String, Object> values = new HashMap<>();
 
-    boolean existeIdentificador(String identificador){
-        return values.containsKey(identificador);
+    boolean existeIdentificador(token name){
+        return values.containsKey(name);
     }
 
-    Object obtener(String identificador) {
+    Object obtener(token identificador) {
         if (values.containsKey(identificador)) {
             return values.get(identificador);
         }
-        throw new RuntimeException("Variable no definida '" + identificador + "'.");
+        throw new RuntimeException("Variable no definida '" + name + "'.");
     }
 
-    void asignar(String identificador, Object valor){
-        values.put(identificador, valor);
+    void asignar(token name, Object valor){
+        values.put(name, valor);
     }
 
 
