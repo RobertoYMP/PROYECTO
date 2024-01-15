@@ -9,8 +9,24 @@ public class StmtBlock extends Statement{
     StmtBlock(List<Statement> statements) {
         this.statements = statements;
     }
-
+   public Object evaluar(Tabla tabla) {
+    tabla.NuevaTabla();
+    Object returnValue = null;
+        for (Statement stmt : statements) {
+            returnValue = stmt.evaluar(tabla);
+            if (returnValue instanceof StmtReturn) {
+                break;
+            }
+        }
+    return returnValue;
+	}
 
 
     
 }
+
+
+
+
+
+    

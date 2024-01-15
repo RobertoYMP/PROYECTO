@@ -9,7 +9,7 @@ public class ExprSuper extends Expression {
         // this.keyword = keyword;
         this.method = method;
     }
-       public Object tablasimbolos(Tabla tabla) {
+       public Object evaluar(Tabla tabla) {
         return null;
     }
 }

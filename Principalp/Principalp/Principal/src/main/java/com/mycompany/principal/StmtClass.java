@@ -12,23 +12,14 @@ public class StmtClass extends Statement {
         this.superclass = superclass;
         this.methods = methods;
     }
-    Object ejecutar(TablaSimbolos tabla){
-        try{
-            Object Valuesup = null;
-            if(superclass != null){
-                Valuesup = superclass.ejecutar(tabla);
-            }
-            TablaSimbolos classEnv = new TablaSimbolos(tabla);
-            classEnv.asignar(name.lexema, Valuesup);
-            for(StmtFunction method : methods){
-                method.ejecutar(classEnv);  
-            }
-            return null;
-        }catch (Exception e){
-            //throw new RuntimeException("No se ejecuto la clase");
-           System.err.println("No se ejecuto la clase " + e.getMessage());
-            e.printStackTrace();
-            return null;
+    
+    @Override
+    public Object evaluar(Tabla tabla){
+    CreacionClases clase = new CreacionClases(name.lexema,methods);
+        if (tabla.existeIdentificador(name.lexema)) {
+            throw new RuntimeException("No se reconoce la clase, ya que existe");
         }
+            tabla.asignar(name.lexema, clase);
+        return clase;
     }
 }

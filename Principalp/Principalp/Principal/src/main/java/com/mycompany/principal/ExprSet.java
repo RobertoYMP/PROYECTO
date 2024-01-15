@@ -1,7 +1,5 @@
 package com.mycompany.principal;
 
-
-
 public class ExprSet extends Expression{
     final Expression object;
     final Token name;
@@ -13,7 +11,7 @@ public class ExprSet extends Expression{
         this.value = value;
     }
 
-    Object tablasimbolos(Tabla tabla) {
+    Object evaluar(Tabla tabla) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

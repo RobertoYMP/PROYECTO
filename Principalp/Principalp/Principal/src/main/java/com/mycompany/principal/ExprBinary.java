@@ -1,30 +1,36 @@
 package com.mycompany.principal;
 
 
+    public class ExprBinary extends Expression {
+        final Expression left;
+        final Token operator;
+        final Expression right;
+    
 
-public class ExprBinary extends Expression{
-    final Expression left;
-    final Token operator;
-    final Expression right;
+        ExprBinary(Expression left, Token operator, Expression right) {
+            this.left = left;
+            this.operator = operator;
+            this.right = right;
+            
+        }
 
-    ExprBinary(Expression left, Token operator, Expression right) {
-        this.left = left;
-        this.operator = operator;
-        this.right = right;
-    }
-    public Expression getLeft(){
-        return left;
-    }
 
-    public Expression getRight(){
-        return right;
-    }
-   @Override 
-    Object tablasimbolos (Tabla tabla){
-        Object Valueizq = left.tablasimbolos(tabla);
-        Object Valueder = left.tablasimbolos(tabla);
-        if(Valueizq instanceof Number && Valueder instanceof Number){
-            //PARA EL TOKEN +
+     /*   @Override
+        public void print(String indentation) {
+            System.out.println(indentation + "ExprBinary");
+            System.out.println(indentation + "\tLeft:");
+            left.print(indentation + "\t\t");
+            System.out.println(indentation + "\tOperator: " + operator.lexema);
+            System.out.println(indentation + "\tRight:");
+            right.print(indentation + "\t\t");
+        }*/
+
+        @Override
+    public Object evaluar(Tabla tabla) {
+        Object Valueizq = left.evaluar(tabla);
+        Object Valueder = right.evaluar(tabla);
+//VERIFICAR LADO IZQUIERDO CON DERECHO EN CUESTIONES NUMERICAS
+          if(Valueizq instanceof Number && Valueder instanceof Number){
             if(operator.tipo == TipoToken.PLUS){
                 return ((Number) Valueizq).floatValue() + ((Number) Valueder).floatValue();
                 }else if(operator.tipo == TipoToken.MINUS){
@@ -43,18 +49,16 @@ public class ExprBinary extends Expression{
                     return((Number) Valueizq).floatValue() <= ((Number) Valueder).floatValue();
                 }else{
                     throw new RuntimeException("No hay algun operador numerico");
-                }
-        }else if(Valueizq instanceof String && Valueder instanceof String){
-            if(operator.tipo == TipoToken.PLUS){
-                return(String) Valueizq + (String) Valueder;
-            }else{
-            throw new RuntimeException("No es aplicable para cadenas");
+                } }
+                else if(Valueizq instanceof String && Valueder instanceof String) {//Concatenacion de cadenas
+                  if(operator.tipo == TipoToken.PLUS){
+                      return(String) Valueizq + (String) Valueder;
+                  }else{
+                  throw new RuntimeException("No es aplicable para cadenas");
             }
-        } else {
-            throw new RuntimeException("No es el tipo de dato");
-            }
-       }
-    
-}
+        }
+                throw new RuntimeException("No se pueden reconocer operaciones con variables distintas ");
 
+    }
+    }
 

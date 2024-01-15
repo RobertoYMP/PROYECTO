@@ -9,7 +9,8 @@ public class ExprGet extends Expression{
         this.object = object;
         this.name = name;
     }
- Object tablasimbolos (Tabla tabla){
+ Object evaluar (Tabla tabla){
         return null;
     }
 }
+    

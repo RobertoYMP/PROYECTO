@@ -1,6 +1,4 @@
 package com.mycompany.principal;
-
-
 public class ExprUnary extends Expression{
     final Token operator;
     final Expression right;
@@ -9,19 +7,16 @@ public class ExprUnary extends Expression{
         this.operator = operator;
         this.right = right;
     }
-    public Expression getOperand(){
-        return right;
-    }
-    
-    Object tablasimbolos (Tabla tabla){
-        Object resultabla = right.tablasimbolos(tabla);
+
+  public Object evaluar (Tabla tabla){
+        Object resultabla = right.evaluar(tabla);
         if(operator.tipo == TipoToken.BANG){
-            if(resultabla instanceof Boolean){
+            if(resultabla instanceof Boolean){//!
                 return !((Boolean)resultabla);
             }else{
                 throw new RuntimeException("No se reconocio una expresion logica");
             }
-        }if(operator.tipo == TipoToken.MINUS){
+        }if(operator.tipo == TipoToken.MINUS){//-
             if(resultabla instanceof Number){
             return -((Number)resultabla).floatValue();
             }
@@ -32,6 +27,4 @@ public class ExprUnary extends Expression{
         throw new RuntimeException("No hay operadores unarios");
     }
 
-
- 
 }

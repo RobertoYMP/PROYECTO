@@ -8,7 +8,7 @@ public class ExprGrouping extends Expression {
         this.expression = expression;
     }
     @Override
-    Object tablasimbolos (Tabla tabla){
-        return expression.tablasimbolos(tabla);
+    Object evaluar (Tabla tabla){
+        return expression.evaluar(tabla);
     }
 }

@@ -6,7 +6,7 @@ public class ExprThis extends Expression{
     ExprThis() {
         // this.keyword = keyword;
     }
-       public Object tablasimbolos (Tabla tabla) {
+       public Object evaluar (Tabla tabla) {
         return null;
     }
 }

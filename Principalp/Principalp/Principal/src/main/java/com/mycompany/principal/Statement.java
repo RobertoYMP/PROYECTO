@@ -2,5 +2,5 @@ package com.mycompany.principal;
 
 
 public abstract class Statement {
-    abstract Object ejecutar(TablaSimbolos tabla);
+    abstract Object evaluar(Tabla tabla);
 }

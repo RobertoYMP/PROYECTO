@@ -1,43 +1,56 @@
 package com.mycompany.principal;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ExprCallFunction extends Expression{
+public class ExprCallFunction extends Expression {
     final Expression callee;
-    // final Token paren;
     final List<Expression> arguments;
 
-    ExprCallFunction(Expression callee, /*Token paren,*/ List<Expression> arguments) {
+    ExprCallFunction(Expression callee, List<Expression> arguments) {
         this.callee = callee;
-       // this.params = params;
-        this.arguments = arguments;
+        this.arguments = arguments;//Se inicia una lista de argumentos nueva si no hay nada o es null
     }
+
+/*
     @Override
-    Object tablasimbolos (Tabla tabla){
+    public String toString() {
+        String calleeStr = (callee != null) ? callee.toString() : "null";
+
+        StringBuilder argsStr = new StringBuilder();
+        for (Expression arg : arguments) {
+            argsStr.append((arg != null) ? arg.toString() : "null").append(", ");
+        }
+        if (argsStr.length() > 0) {
+            argsStr.setLength(argsStr.length() - 2); // Elimina la última coma y espacio
+        }
+
+        return calleeStr + "(" + argsStr.toString() + ")";
+    }*/
+
+
+@Override
+public Object evaluar(Tabla tabla) {
         Token name = ((ExprVariable)callee).name;
         Object obj = tabla.obtener(name.lexema);
         if(obj instanceof StmtFunction){
             StmtFunction funcion = (StmtFunction)obj;
             List<Object> argumento = new ArrayList<>();
             for(Expression expression : arguments ){
-                argumento.add(expression.tablasimbolos(tabla));
+                argumento.add(expression.evaluar(tabla));
                 
             }
             if(argumento.size() != funcion.params.size()){
                 throw new RuntimeException("El numero de argumentos no son correctos para la funcion"+ name.lexema+" ");
-                
+             
             }
             
             Tabla entornoLocal = new Tabla();
             for (int i = 0; i < argumento.size(); i++) {
                 entornoLocal.asignar(funcion.params.get(i).lexema, argumento.get(i));
             }
-            funcion.body.ejecutar(entornoLocal);
+            funcion.body.evaluar(entornoLocal);
         }
         throw new RuntimeException("El id no corresponde a la funcion");
     }}
-    
-
 
 

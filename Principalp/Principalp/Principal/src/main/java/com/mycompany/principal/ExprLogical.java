@@ -10,17 +10,11 @@ public class ExprLogical extends Expression{
         this.operator = operator;
         this.right = right;
     }
-    public Expression getLeft(){
-        return left;
-    }
 
-    public Expression getRight(){
-        return right;
-    }
     @Override
-    Object tablasimbolos (Tabla tabla){
-        Object Valueizq = left.tablasimbolos(tabla);
-        Object Valueder = right.tablasimbolos(tabla);
+    Object evaluar (Tabla tabla){
+        Object Valueizq = left.evaluar(tabla);
+        Object Valueder = right.evaluar(tabla);
         if(Valueizq instanceof Boolean && Valueder instanceof Boolean){
             if(operator.tipo == TipoToken.AND)
                 return((Boolean) Valueizq && (Boolean) Valueder);
