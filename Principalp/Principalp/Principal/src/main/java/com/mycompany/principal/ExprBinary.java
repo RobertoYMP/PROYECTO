@@ -5,12 +5,14 @@ package com.mycompany.principal;
         final Expression left;
         final Token operator;
         final Expression right;
+        final Tabla tabla;
     
 
-        ExprBinary(Expression left, Token operator, Expression right) {
+        ExprBinary(Expression left, Token operator, Expression right, Tabla tabla) {
             this.left = left;
             this.operator = operator;
             this.right = right;
+            this.tabla = tabla;
             
         }
 
@@ -61,4 +63,3 @@ package com.mycompany.principal;
 
     }
     }
-

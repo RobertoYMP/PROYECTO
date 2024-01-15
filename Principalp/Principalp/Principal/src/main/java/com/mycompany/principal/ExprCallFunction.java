@@ -27,6 +27,10 @@ public class ExprCallFunction extends Expression {
         return calleeStr + "(" + argsStr.toString() + ")";
     }*/
 
+    ExprCallFunction(Expression expr, List<Expression> lstArguments, Tabla tabla) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 @Override
 public Object evaluar(Tabla tabla) {

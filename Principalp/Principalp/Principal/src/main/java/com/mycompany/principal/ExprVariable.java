@@ -6,6 +6,10 @@ class ExprVariable extends Expression {
     ExprVariable(Token name) {
         this.name = name;
     }
+
+    ExprVariable(Token id, Tabla tabla) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     Object evaluar (Tabla tabla){
         if(!tabla.existeIdentificador(name.lexema)){
