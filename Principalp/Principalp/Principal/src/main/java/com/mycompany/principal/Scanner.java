@@ -1,3 +1,5 @@
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -16,7 +18,7 @@ import java.util.Map;
 public class Scanner {
     private final String source;
 
-    private final List<Token> tokens = new ArrayList<>();
+  
 
     private static final Map<String, TipoToken> palabrasReservadas;
     static {
@@ -36,7 +38,7 @@ public class Scanner {
         palabrasReservadas.put("EOF", TipoToken.EOF);
         palabrasReservadas.put("or", TipoToken.OR);
     }
-
+  private final List<Token> tokens = new ArrayList<>();
     public Scanner(String source){
         this.source = source + " ";
     }

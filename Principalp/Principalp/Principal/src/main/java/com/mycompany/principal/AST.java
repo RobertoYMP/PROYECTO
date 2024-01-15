@@ -20,20 +20,22 @@ public class AST implements Parser {
     }
 
     @Override
-    public boolean parse() {
-        statements = PROGRAM();
-        if (preanalisis.tipo == TipoToken.EOF && !hayErrores) {
-            //System.out.println("Entrada correcta");
-           //  printTree();
-             evaluateStatements(statements);
-            return true;
-        }else {
-            System.out.println("Hay errores");
-            return false;
-        }
+            public boolean parse(){
+                  PROGRAM();
+
+                  if(!hayErrores) {
+                      System.out.println("No se encontraron errores");
+                  }else if (preanalisis.tipo == TipoToken.EOF) {
+                      System.out.println("No se encontraron errores");
+                  } else {
+                      System.out.println("Hay errores");
+                      return true;
+                  }
+
+                  return false;
     }
      // PROGRAM - DECLARATION
-    public List<Statement> PROGRAM(){
+  public List<Statement> PROGRAM(){
         List<Statement> statements = new ArrayList<>();
         if(preanalisis.tipo != TipoToken.EOF){
             DECLARATION(statements);
@@ -52,21 +54,22 @@ public class AST implements Parser {
                     - STATEMENT DECLARATION
                     - E
     */
-    private void DECLARATION(List<Statement> statements) {
-        if (preanalisis.tipo == TipoToken.FUN) {
-            Statement funDecl = FUN_DECL();
-            statements.add(funDecl);
-            DECLARATION(statements);
-        } else if (preanalisis.tipo == TipoToken.VAR) {
-            Statement varDecl = VAR_DECL();
-            statements.add(varDecl);
-            DECLARATION(statements);
-        } else if (preanalisis.tipo == TipoToken.EQUAL || preanalisis.tipo == TipoToken.BANG || preanalisis.tipo == TipoToken.MINUS || preanalisis.tipo == TipoToken.TRUE || preanalisis.tipo == TipoToken.FALSE || preanalisis.tipo == TipoToken.NULL || preanalisis.tipo == TipoToken.NUMBER || preanalisis.tipo == TipoToken.STRING || preanalisis.tipo == TipoToken.IDENTIFIER || preanalisis.tipo == TipoToken.LEFT_PAREN || preanalisis.tipo == TipoToken.FOR || preanalisis.tipo == TipoToken.IF || preanalisis.tipo == TipoToken.PRINT || preanalisis.tipo == TipoToken.RETURN || preanalisis.tipo == TipoToken.WHILE || preanalisis.tipo == TipoToken.LEFT_BRACE) {
-            Statement stmt = STATEMENT();
-            statements.add(stmt);
-            DECLARATION(statements);
-        }
-    }
+        public void DECLARATION(List <Statement> statements){
+                if(preanalisis.tipo== TipoToken.FUN){
+                    Statement funDecl = FUN_DECL();
+                    statements.add(funDecl);
+                    DECLARATION(statements);
+                }else if(preanalisis.tipo == TipoToken.VAR){
+                    Statement varDecl = VAR_DECL();
+                    statements.add(varDecl);
+                    DECLARATION(statements);
+                }else if(preanalisis.tipo == TipoToken.BANG || preanalisis.tipo == TipoToken.MINUS || preanalisis.tipo == TipoToken.TRUE || preanalisis.tipo == TipoToken.FALSE || preanalisis.tipo == TipoToken.NULL || preanalisis.tipo == TipoToken.NUMBER || preanalisis.tipo == TipoToken.STRING || preanalisis.tipo == TipoToken.IDENTIFIER || preanalisis.tipo == TipoToken.LEFT_PAREN|| preanalisis.tipo== TipoToken.FOR || preanalisis.tipo == TipoToken.IF || preanalisis.tipo == TipoToken.PRINT || preanalisis.tipo == TipoToken.RETURN || preanalisis.tipo == TipoToken.WHILE || preanalisis.tipo == TipoToken.LEFT_BRACE){
+                    Statement stmt = STATEMENT();
+                    statements.add(stmt);
+                    DECLARATION(statements);
+                }
+            }
+
 
     //DECLARACIONES
      // FUN_DECL - fun FUNCTION
@@ -128,24 +131,31 @@ public class AST implements Parser {
             - WHILE_STMT
             - BLOCK
     */
-    private Statement STATEMENT() {
-        if (preanalisis.tipo == TipoToken.BANG || preanalisis.tipo == TipoToken.MINUS || preanalisis.tipo == TipoToken.TRUE || preanalisis.tipo == TipoToken.FALSE || preanalisis.tipo == TipoToken.NULL || preanalisis.tipo == TipoToken.NUMBER || preanalisis.tipo == TipoToken.STRING || preanalisis.tipo == TipoToken.IDENTIFIER || preanalisis.tipo == TipoToken.LEFT_PAREN) {
-            return EXPR_STMT();
-        } else if (preanalisis.tipo == TipoToken.FOR) {
-            return FOR_STMT();
-        } else if (preanalisis.tipo == TipoToken.IF) {
-            return IF_STMT();
-        } else if (preanalisis.tipo == TipoToken.PRINT) {
-            return PRINT_STMT();
-        } else if (preanalisis.tipo == TipoToken.RETURN) {
-            return RETURN_STMT();
-        } else if (preanalisis.tipo == TipoToken.WHILE) {
-            return WHILE_STMT();
-        } else if (preanalisis.tipo == TipoToken.LEFT_BRACE) {
-            return BLOCK();
-        } else {
-            hayErrores = true;
-            System.out.println("Error");
+     public Statement STATEMENT(){
+        if(preanalisis.tipo == TipoToken.BANG || preanalisis.tipo == TipoToken.MINUS || preanalisis.tipo == TipoToken.TRUE || preanalisis.tipo == TipoToken.FALSE || preanalisis.tipo == TipoToken.NULL || preanalisis.tipo == TipoToken.NUMBER || preanalisis.tipo == TipoToken.STRING || preanalisis.tipo == TipoToken.IDENTIFIER || preanalisis.tipo == TipoToken.LEFT_PAREN){
+            Statement expr = EXPR_STMT();
+            return expr;
+        }else if(preanalisis.tipo == TipoToken.FOR){
+            Statement forStmt = FOR_STMT();
+            return forStmt;
+        }else if(preanalisis.tipo == TipoToken.IF){
+            Statement ifsmt = IF_STMT();
+            return ifsmt;
+        }else if(preanalisis.tipo == TipoToken.PRINT){
+            Statement print  = PRINT_STMT();
+            return print;
+        }else if(preanalisis.tipo == TipoToken.RETURN){
+            Statement returnstm = RETURN_STMT();
+            return returnstm;
+        }else if(preanalisis.tipo == TipoToken.WHILE){
+            Statement whilestm = WHILE_STMT();
+            return whilestm;
+        }else if(preanalisis.tipo == TipoToken.LEFT_BRACE){
+            Statement block = BLOCK();
+            return block;
+        }else{
+            hayErrores=true;
+            System.out.println("Error en: "+preanalisis.lexema);
             return null;
         }
     }
@@ -405,34 +415,34 @@ public class AST implements Parser {
                     - <= TERM COMPARISON_2
                     - E 
     */
-        private Expression COMPARISON_2(Expression expr) {
-            if (preanalisis.tipo == TipoToken.GREATER) {
-                match(TipoToken.GREATER);
-                Token operador = previous();
-                Expression expr2 = TERM();
-                ExprBinary expb = new ExprBinary(expr, operador, expr2, tabla);
-                return COMPARISON_2(expb);
-            } else if (preanalisis.tipo == TipoToken.GREATER_EQUAL) {
-                match(TipoToken.GREATER_EQUAL);
-                Token operador = previous();
-                Expression expr2 = TERM();
-                ExprBinary expb = new ExprBinary(expr, operador, expr2, tabla);
-                return COMPARISON_2(expb);
-            } else if (preanalisis.tipo == TipoToken.LESS) {
-                match(TipoToken.LESS);
-                Token operador = previous();
-                Expression expr2 = TERM();
-                ExprBinary expb = new ExprBinary(expr, operador, expr2, tabla);
-                return COMPARISON_2(expb);
-            } else if (preanalisis.tipo == TipoToken.LESS_EQUAL) {
-                match(TipoToken.LESS_EQUAL);
-                Token operador = previous();
-                Expression expr2 = TERM();
-                ExprBinary expb = new ExprBinary(expr, operador, expr2, tabla);
-                return COMPARISON_2(expb);
-            }
-            return expr;
+  public Expression COMPARISON_2(Expression expr){
+        if(preanalisis.tipo == TipoToken.GREATER){
+            match(TipoToken.GREATER);
+            Token operador = previous();
+            Expression expr2= TERM();
+            ExprBinary expb= new ExprBinary(expr, operador, expr2,tabla);
+            return COMPARISON_2(expb);
+        }else if(preanalisis.tipo == TipoToken.GREATER_EQUAL){
+            match(TipoToken.GREATER_EQUAL);
+            Token operador = previous();
+            Expression expr2= TERM();
+            ExprBinary expb= new ExprBinary(expr, operador, expr2, tabla);
+            return COMPARISON_2(expb);
+        }else if(preanalisis.tipo == TipoToken.LESS){
+            match(TipoToken.LESS);
+            Token operador = previous();
+            Expression expr2= TERM();
+            ExprBinary expb= new ExprBinary(expr, operador, expr2,tabla);
+            return COMPARISON_2(expb);
+        }else if(preanalisis.tipo == TipoToken.LESS_EQUAL){
+            match(TipoToken.LESS_EQUAL);
+            Token operador = previous();
+            Expression expr2= TERM();
+            ExprBinary expb= new ExprBinary(expr, operador, expr2,tabla);
+            return COMPARISON_2(expb);
         }
+        return expr;
+    }
 
     // TERM - FACTOR TERM_2
     private Expression TERM() {
@@ -630,15 +640,15 @@ public class AST implements Parser {
     /*ARGUMENTS_OPC - EXPRESSION ARGUMENTS
                     - E
     */
-    private List<Expression> ARGUMENTS_OPC() {
-        if (preanalisis.tipo == TipoToken.BANG || preanalisis.tipo == TipoToken.MINUS || preanalisis.tipo == TipoToken.TRUE || preanalisis.tipo == TipoToken.FALSE || preanalisis.tipo == TipoToken.NULL || preanalisis.tipo == TipoToken.NUMBER || preanalisis.tipo == TipoToken.STRING || preanalisis.tipo == TipoToken.IDENTIFIER || preanalisis.tipo == TipoToken.LEFT_PAREN) {
-            List<Expression> arguments = new ArrayList<>();
+   public List<Expression> ARGUMENTS_OPC(){
+        List <Expression> arguments = new ArrayList<>();
+        if(preanalisis.tipo == TipoToken.BANG || preanalisis.tipo == TipoToken.MINUS || preanalisis.tipo == TipoToken.TRUE || preanalisis.tipo == TipoToken.FALSE || preanalisis.tipo == TipoToken.NULL || preanalisis.tipo == TipoToken.NUMBER || preanalisis.tipo == TipoToken.STRING || preanalisis.tipo == TipoToken.IDENTIFIER || preanalisis.tipo == TipoToken.LEFT_PAREN){
             arguments.add(expression());
             ARGUMENTS(arguments);
-            return arguments;
         }
-        return null;
+        return arguments;
     }
+
       /*ARGUMENTS - , EXPRESSION ARGUMENTS
                 - E 
     */
@@ -666,12 +676,7 @@ public class AST implements Parser {
     private Token previous() {
         return this.tokens.get(i - 1);
     }
-    
-    public void printTree() {
-    for (Statement stmt : statements) {
-       
-    }
-}
+   
     private Token next() {
     if (i < tokens.size() - 1) {
         return tokens.get(i + 1);
