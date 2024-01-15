@@ -35,15 +35,13 @@ public class Scanner {
         palabrasReservadas.put("null", TipoToken.NULL);
         palabrasReservadas.put("EOF", TipoToken.EOF);
         palabrasReservadas.put("or", TipoToken.OR);
-
-
     }
 
     public Scanner(String source){
         this.source = source + " ";
     }
 
-    public List<Token> scanTokens(){
+    public List<Token> scanTokens() throws Exception{
         int estado = 0;
         char c;
         String lexema = "";

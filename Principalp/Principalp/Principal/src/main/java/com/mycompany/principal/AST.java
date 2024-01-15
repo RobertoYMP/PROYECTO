@@ -32,9 +32,7 @@ public class AST implements Parser {
             return false;
         }
     }
-    
-
-   // PROGRAM - DECLARATION
+     // PROGRAM - DECLARATION
     public List<Statement> PROGRAM(){
         List<Statement> statements = new ArrayList<>();
         if(preanalisis.tipo != TipoToken.EOF){

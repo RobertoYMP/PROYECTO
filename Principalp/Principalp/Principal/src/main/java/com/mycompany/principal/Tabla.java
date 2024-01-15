@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Tabla {
-    private Map<String, Object> values = new HashMap<>();
+    private  Map<String, Object> values = new HashMap<>();
  /*   private Map<String, Object> registroClases = new HashMap<>();
     private Map<String, Object> registroMetodos = new HashMap<>();*/
 
-    public Tabla() {
+   /* public Tabla() {
            values = (Map<String, Object>) List.of(new HashMap<>());// El alcance global es simplemente el alcance actual en este enfoque
-    }
+    }*/
 
     boolean existeIdentificador(String identificador) {
         return values.containsKey(identificador);
