@@ -2,13 +2,11 @@ package com.mycompany.principal;
 
 class ExprVariable extends Expression {
     final Token name;
+    final Tabla tabla;
 
-    ExprVariable(Token name) {
+    ExprVariable(Token name, Tabla tabla) {
         this.name = name;
-    }
-
-    ExprVariable(Token id, Tabla tabla) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.tabla= tabla;
     }
     
     Object evaluar (Tabla tabla){
